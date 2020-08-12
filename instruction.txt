@@ -1,0 +1,2 @@
+1. Change the DB credentials in config.php to yours
+2. Change the RewriteBase in .htaccess file in public->.htaccess file to your base
