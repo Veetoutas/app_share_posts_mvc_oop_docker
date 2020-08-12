@@ -13,11 +13,11 @@
         public function __construct() {
             $url = $this->getUrl();
             // Look in controllers for first value of URL
-            if (file_exists(ROOT_DIR . '/app/controllers/' . ucwords($url[0]). '.php')) {
+            if (file_exists(ROOT_DIR . '/app/controllers/' . ucwords($url[1]). '.php')) {
                 // If exists, set it as controller
                 $this->currentController = ucwords($url[1]);
                 // Unset 0 Index
-                unset($url[0]);
+                unset($url[1]);
             }
 
 

@@ -1,9 +1,17 @@
-<?php
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
-require APPROOT . '/views/inc/header.php';
+<div class="jumbotron jumbotron-flud">
+    <div class="container">
+        <h1 class="display-3">
+            <?php echo $data['title']; ?>
+        </h1>
 
-echo 'About';
-echo '<br>';
-echo $data['title'];
+        <br>
+        <p class="lead">
+            <?php echo $data['description']; ?>
+        </p>
+        <p>Version: <strong> <?php echo APP_VERSION; ?></strong></p>
+    </div>
+</div>
 
-require APPROOT . '/views/inc/footer.php';
+<?php require APPROOT . '/views/inc/footer.php'; ?>

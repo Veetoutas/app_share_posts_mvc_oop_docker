@@ -10,8 +10,8 @@
         private $host = 'mysql';
         private $user = 'root';
         private $pass = 'rootpassword';
-        private $dbname = 'test1';
-        private $port = '3306';
+        private $dbname = 'shareposts';
+        private $port = '3307';
 
         // Database handler
         private $dbh;

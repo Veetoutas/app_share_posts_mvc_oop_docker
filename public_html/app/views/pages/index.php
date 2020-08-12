@@ -1,8 +1,16 @@
-<?php require APPROOT . '/views/inc/header.php';
+<?php require APPROOT . '/views/inc/header.php'; ?>
 
-    echo "<h1>" . $data['title'] . "</h1>";
-    echo "<p>1. Change the DB credentials in config.php to yours</p>";
-    echo "<p>2. Change the RewriteBase in .htaccess file in public -> .htaccess file to your base</p>";
-    echo "<p>3. Create a a model in 'models' folder</p>";
+    <div class="jumbotron jumbotron-flud">
+        <div class="container">
+            <h1 class="display-3">
+                <?php echo $data['title']; ?>
+            </h1>
+            <br>
 
-require APPROOT . '/views/inc/footer.php';
+            <p class="lead">
+                <?php echo $data['description']; ?>
+            </p>
+        </div>
+    </div>
+
+<?php require APPROOT . '/views/inc/footer.php'; ?>

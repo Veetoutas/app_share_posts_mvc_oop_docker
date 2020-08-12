@@ -12,7 +12,8 @@
             // Get the post from DB
 
             $data = [
-                'title' => 'Custom MVC framework template',
+                'title' => 'Share Posts',
+                'description' => 'Simple social network built on the Custom MVC PHP framework'
             ];
             // Pass data from DB to view and show it
             $this->view('pages/index', $data);
@@ -21,7 +22,8 @@
 
         public function about() {
             $data = [
-                'title' => 'About page'
+                'title' => 'About page',
+                'description' => 'App to share posts with toher users'
             ];
 
             $this->view('pages/about', $data);
