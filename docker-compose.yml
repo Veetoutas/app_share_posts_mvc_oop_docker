@@ -26,6 +26,7 @@ services:
       - backend
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
+      - PMA_HOST=mysql
 networks:
   frontend:
   backend:

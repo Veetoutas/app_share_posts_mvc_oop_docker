@@ -11,7 +11,7 @@
         private $user = 'root';
         private $pass = 'rootpassword';
         private $dbname = 'shareposts';
-        private $port = '3307';
+        private $port = '3306';
 
         // Database handler
         private $dbh;
@@ -28,6 +28,8 @@
             );
             // Create PDO instance
             try {
+
+// SITA EILUTE NULAUZIA KODA !!!
                 $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
             }
             catch(PDOException $e) {
