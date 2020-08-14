@@ -60,10 +60,20 @@
                 }
 
 
-                // Make sure errors are empty
+                // IF NO ERRORS, REGISTER
                 if (empty($data['name_error']) && empty($data['email_error']) && empty($data['password_error']) && empty($data['confirm_password_error'])) {
                     // Validated
-                    die('success-register');
+                    $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+
+                    // Register user
+                    if($this->userModel->register($data)) {
+                        redirect ('posts');
+//                        die('registered');
+                    }
+
+                    else {
+                        die('Failed to register');
+                    }
                 }
                 else {
                     // Load view with errors
