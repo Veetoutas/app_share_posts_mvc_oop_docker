@@ -9,7 +9,9 @@
         }
 
         public function index() {
-            // Get the post from DB
+            if(isLoggedIn()) {
+                redirect('posts');
+            }
 
             $data = [
                 'title' => 'Share Posts',
