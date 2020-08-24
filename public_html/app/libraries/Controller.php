@@ -13,7 +13,7 @@ class Controller {
     }
 
         // Load view
-    public function view($view, $data = []) {
+    public function view($view, $data = [], $errors = []) {
         // Check for view file
         if(file_exists(ROOT_DIR . '/app/views/' . $view . '.php')) {
             require_once ROOT_DIR . '/app/views/' . $view . '.php';

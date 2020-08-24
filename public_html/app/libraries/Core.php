@@ -12,12 +12,13 @@
 
         public function __construct() {
             $url = $this->getUrl();
+            $url1 = array_shift($url);
             // Look in controllers for first value of URL
-            if (file_exists(ROOT_DIR . '/app/controllers/' . ucwords($url[1]). '.php')) {
+            if (file_exists(ROOT_DIR . '/app/controllers/' . ucwords($url[0]). '.php')) {
                 // If exists, set it as controller
-                $this->currentController = ucwords($url[1]);
+                $this->currentController = ucwords($url[0]);
                 // Unset 0 Index
-                unset($url[1]);
+                unset($url[0]);
             }
 
 
@@ -27,12 +28,12 @@
             $this->currentController = new $this->currentController;
 
             // Check for second part of URL
-            if (isset($url[2])) {
+            if (isset($url[1])) {
                 // Check to see if method exists in controller
-                if(method_exists($this->currentController, $url[2])) {
-                    $this->currentMethod = $url[2];
+                if(method_exists($this->currentController, $url[1])) {
+                    $this->currentMethod = $url[1];
                     // Unset 1 index
-                    unset($url[2]);
+                    unset($url[1]);
                 }
             }
             // Get params

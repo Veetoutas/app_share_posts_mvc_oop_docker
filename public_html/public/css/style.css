@@ -11,3 +11,7 @@ body {
 .add-post-btn {
     float: right;
 }
+
+#error_message_custom {
+    color: red!important;
+ }

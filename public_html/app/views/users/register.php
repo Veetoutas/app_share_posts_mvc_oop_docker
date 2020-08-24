@@ -7,6 +7,11 @@
                 <p>Please fill out this form to register</p>
                 <form action="<?php echo URL_ROOT; ?>/users/register" method="post">
 
+                    <span id="error_message_custom"><?php foreach($errors as $error) :  ?></span>
+                    <span><?php echo $error; ?></span>
+                    <span><?php  endforeach; ?></span>
+                    <br>
+
                     <div class="form-group">
                         <label for="name">Name: <sup>*</sup></label>
                         <input
@@ -14,7 +19,6 @@
                             class="form-control form-control-lg
                             <?php echo (!empty($data['name_error'])) ? 'is-invalid' : '';?>"
                             value="<?php echo $data['name']; ?>">
-                        <span class="invalid-feedback"><?php echo $data['name_error']; ?></span>
                     </div>
 
                     <div class="form-group">
@@ -24,7 +28,6 @@
                                 class="form-control form-control-lg
                             <?php echo (!empty($data['email_error'])) ? 'is-invalid' : '';?>"
                                 value="<?php echo $data['email']; ?>">
-                        <span class="invalid-feedback"><?php echo $data['email_error']; ?></span>
                     </div>
 
                     <div class="form-group">
@@ -34,7 +37,6 @@
                                 class="form-control form-control-lg
                             <?php echo (!empty($data['password_error'])) ? 'is-invalid' : '';?>"
                                 value="<?php echo $data['password']; ?>">
-                        <span class="invalid-feedback"><?php echo $data['password_error']; ?></span>
                     </div>
 
                     <div class="form-group">
@@ -44,7 +46,6 @@
                                 class="form-control form-control-lg
                             <?php echo (!empty($data['confirm_password_error'])) ? 'is-invalid' : '';?>"
                                 value="<?php echo $data['confirm_password']; ?>">
-                        <span class="invalid-feedback"><?php echo $data['confirm_password_error']; ?></span>
                     </div>
 
                     <div class="row">

@@ -3,102 +3,61 @@
     class Users extends Controller {
         public function __construct() {
             $this->userModel = $this->model('User');
+            $this->validator = new Validator();
         }
-
 
         // REGISTER
         public function register() {
+
+            // IF POST METHOD
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                // Process form
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
                 // Init data
                 $data = [
                     'name' => trim($_POST['name']),
                     'email' => trim($_POST['email']),
                     'password' => trim($_POST['password']),
-                    'confirm_password' => trim($_POST['confirm_password']),
-                    'name_error' => '',
-                    'email_error' => '',
-                    'password_error' => '',
-                    'confirm_password_error' => ''
+                    'confirm_password' => trim($_POST['confirm_password'])
+                ];
+                // Validations
+                $validateData = [
+                    'name' => ['minLen'],
+                    'email' => ['required', 'taken'],
+                    'password' => ['required', 'minLen'],
+                    'confirm_password' => ['passMatch']
                 ];
 
-                //Validate Email
-                if (empty($data['email'])) {
-                    $data['email_error'] = 'Please enter email';
-                }
-                else {
-                    // Check email
-                    if($this->userModel->findUserByEmail($data['email'])) {
-                        $data['email_error'] = 'Email is already taken';
-                    }
-                }
 
-                // Validate Name
-                if (empty($data['name'])) {
-                    $data['name_error'] = 'Please enter name';
-                }
+                // IF POST VALIDATION SUCCESSFUL
+                $validated = $this->validator->validate($data, $validateData);
+                $errors = $this->validator->errors;
 
-                // Validate Password
-                if (empty($data['password'])) {
-                    $data['password_error'] = 'Please enter password';
-                }
-                else if (strlen($data['password']) < 6) {
-                    $data['password_error'] = 'Password must have at least 6 characters';
-                }
-
-                // Validate Confirm Password
-                if (empty($data['confirm_password'])) {
-                    $data['confirm_password_error'] = 'Please confirm password';
-                }
-                else {
-                    if ($data['password'] != $data['confirm_password']) {
-                        $data['confirm_password_error'] = 'Passwords do not match';
-                    }
-                }
-
-
-                // IF NO ERRORS, REGISTER
-                if (empty($data['name_error']) && empty($data['email_error']) && empty($data['password_error']) && empty($data['confirm_password_error'])) {
+                if ($validated) {
                     // Validated
                     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-
                     // Register user
                     if($this->userModel->register($data)) {
                         flash('register_success', 'You are registered and can log in');
                         redirect ('users/login');
-//                        die('registered');
-                    }
-
-                    else {
-                        die('Failed to register');
                     }
                 }
-                else {
-                    // Load view with errors
-                    $this->view('users/register', $data);
-                    }
+                // IF POST VALIDATION FAILS
+                $this->view('users/register', $data, $errors);
+            }
+
+
+            // IF NOT A POST METHOD SHOW AN EMPTY FORM
+            else {
+                // SHow the form is else
+                // Init data
+                $data = [
+                    'name' => '',
+                    'email' => '',
+                ];
+                // Load view
+                $this->view('users/register', $data);
                 }
-
-                else {
-                    // SHow the form is else
-                    // Init data
-                    $data = [
-                        'name' => '',
-                        'email' => '',
-                        'password' => '',
-                        'confirm_password' => '',
-                        'name_error' => '',
-                        'email_error' => '',
-                        'password_error' => '',
-                        'confirm_password_error' => ''
-                    ];
-                    // Load view
-                    $this->view('users/register', $data);
-
-                    }
             }
 
 
@@ -108,68 +67,39 @@
                 // Process form
                 // Sanitize POST data
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
                 // Init data
                 $data = [
                     'email' => trim($_POST['email']),
-                    'password' => trim($_POST['password']),
-                    'email_error' => '',
-                    'password_error' => '',
+                    'password' => trim($_POST['password'])
+                ];
+                // Validations
+                $validateData = [
+                    'email' => ['required', 'exists'],
+                    'password' => ['required']
                 ];
 
-                //Validate Email
-                if (empty($data['email'])) {
-                    $data['email_error'] = 'Please enter email';
-                }
+                // IF POST VALIDATION SUCCESSFUL
+                $validated = $this->validator->validate($data, $validateData);
 
-                // Validate Password
-                if (empty($data['password'])) {
-                    $data['password_error'] = 'Please enter password';
-                }
-
-                // Check for user/email
-                if($this->userModel->findUserByEmail($data['email'])) {
-                    // User found
-                }
-                else {
-                    $data['email_error'] = 'No user found';
-                }
-
-
-                // Make sure errors are empty
-                if (empty($data['email_error']) && empty($data['password_error'])) {
-                    // Validated
+                if ($validated) {
                     // Check and set logged in user
                     $loggedInUser = $this->userModel->login($data['email'], $data['password']);
-
-                    if($loggedInUser) {
-                        // Create Session
-                        $this->createUserSession($loggedInUser);
-                    }
-                    else {
-                        $data['password_error'] = 'Password incorrect';
-                        $this->view('users/login', $data);
-                    }
-
+                    // Create Session
+                    $this->createUserSession($loggedInUser);
                 }
-                else {
-                    // Load view with errors
-                    $this->view('users/login', $data);
-                    }
-                }
+                // If validation failed load view with errors
+                $errors = $this->validator->errors;
+                $this->view('users/login', $data, $errors);
+            }
 
-                else {
-                    // SHow the form is else
-                    // Init data
-                    $data = [
-                        'email' => '',
-                        'password' => '',
-                        'email_error' => '',
-                        'password_error' => ''
-                    ];
-                    // Load view
-                    $this->view('users/login', $data);
-                }
+
+            // IF NOT A POST METHOD SHOW AN EMPTY FORM
+            $data = [
+                'email' => '',
+                'password' => ''
+            ];
+            // Load view
+            $this->view('users/login', $data);
             }
 
             public function createUserSession($user) {
@@ -186,5 +116,4 @@
                 session_destroy();
                 redirect('users/login');
             }
-
         }

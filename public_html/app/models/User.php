@@ -12,21 +12,15 @@
         public function login($email, $password) {
             $this->db->query('SELECT * FROM users WHERE email = :email');
             $this->db->bind(':email', $email);
-
             // Take the user row with the same user email
             $row = $this->db->single();
-
             // Store the hashed password of a user into a variable
             $hashed_password = $row->password;
-
             // If hashed password and the entered password matches, return the row of a user
             if(password_verify($password, $hashed_password)) {
                 return $row;
             }
-            else {
                 return false;
-            }
-
         }
 
         // Register user
@@ -47,7 +41,7 @@
         }
 
         // Find user by email
-        public function findUserByEmail($email) {
+        public function findByEmail($email) {
             // query() is a function from class 'Database' which we instantiated
             $this->db->query('SELECT * FROM users WHERE email = :email');
             $this->db->bind(':email', $email);
@@ -58,8 +52,6 @@
             if($this->db->rowCount() > 0) {
                 return true;
             }
-            else {
                 return false;
-            }
         }
     }

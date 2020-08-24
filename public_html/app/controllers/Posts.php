@@ -1,18 +1,14 @@
 <?php
-
     class Posts extends Controller {
-
-        public function __construct() {
-            if (!isLoggedIn()) {
+        public function __construct(){
+            if(!isLoggedIn()){
                 redirect('users/login');
             }
 
             $this->postModel = $this->model('Post');
         }
 
-
-        // INDEX
-        public function index() {
+        public function index(){
             // Get posts
             $posts = $this->postModel->getPosts();
 
@@ -23,11 +19,8 @@
             $this->view('posts/index', $data);
         }
 
-
-        // ADD
-        public function add() {
-
-            if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        public function add(){
+            if($_SERVER['REQUEST_METHOD'] == 'POST'){
                 // Sanitize POST array
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -39,31 +32,29 @@
                     'body_error' => ''
                 ];
 
-                // Validate entries
-                if(empty($data['title'])) {
+                // Validate data
+                if(empty($data['title'])){
                     $data['title_error'] = 'Please enter title';
                 }
-                if(empty($data['body'])) {
+                if(empty($data['body'])){
                     $data['body_error'] = 'Please enter body text';
                 }
 
                 // Make sure no errors
-                if(empty($data['title_error']) && empty($data['title_error'])) {
+                if(empty($data['title_error']) && empty($data['body_error'])){
                     // Validated
-                    if($this->postModel->addPost($data)) {
+                    if($this->postModel->addPost($data)){
                         flash('post_message', 'Post Added');
                         redirect('posts');
+                    } else {
+                        die('Something went wrong');
                     }
-                    else {
-                        die('Something wrong in Add Post');
-                    }
-                }
-                else {
-                    // Load the view with errors
+                } else {
+                    // Load view with errors
                     $this->view('posts/add', $data);
                 }
-            }
-            else {
+
+            } else {
                 $data = [
                     'title' => '',
                     'body' => ''
@@ -73,9 +64,7 @@
             }
         }
 
-
-        // SHOW post page
-        public function show($id) {
+        public function show($id){
             $post = $this->postModel->getPostById($id);
 
             $data = [
