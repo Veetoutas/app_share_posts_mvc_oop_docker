@@ -1,11 +1,12 @@
 <?php
     class Posts extends Controller {
+
         public function __construct(){
             if(!isLoggedIn()){
                 redirect('users/login');
             }
-
             $this->postModel = $this->model('Post');
+            $this->validator = new Validator();
         }
 
         public function index(){
@@ -27,41 +28,36 @@
                 $data = [
                     'title' => trim($_POST['title']),
                     'body' => trim($_POST['body']),
-                    'user_id' => $_SESSION['user_id'],
-                    'title_error' => '',
-                    'body_error' => ''
+                    'user_id' => $_SESSION['user_id']
+                ];
+                // Validations
+                $validateData = [
+                    'title' => ['required'],
+                    'body' => ['required']
                 ];
 
-                // Validate data
-                if(empty($data['title'])){
-                    $data['title_error'] = 'Please enter title';
-                }
-                if(empty($data['body'])){
-                    $data['body_error'] = 'Please enter body text';
-                }
+                // IF POST VALIDATION SUCCESSFUL
+                $validated = $this->validator->validate($data, $validateData);
+                $errors = $this->validator->errors;
 
-                // Make sure no errors
-                if(empty($data['title_error']) && empty($data['body_error'])){
-                    // Validated
-                    if($this->postModel->addPost($data)){
+                if ($validated) {
+                    // Check if posting was successful
+                    $posted = $this->postModel->addPost($data);
+                    if($posted){
                         flash('post_message', 'Post Added');
                         redirect('posts');
-                    } else {
-                        die('Something went wrong');
                     }
-                } else {
-                    // Load view with errors
-                    $this->view('posts/add', $data);
                 }
-
-            } else {
-                $data = [
-                    'title' => '',
-                    'body' => ''
-                ];
-
-                $this->view('posts/add', $data);
+                // IF POST VALIDATION FAILS
+                $this->view('posts/add', $data, $errors);
             }
+
+            // IF NOT A POST METHOD SHOW AN EMPTY POST FORM
+            $data = [
+                'title' => '',
+                'body' => ''
+            ];
+            $this->view('posts/add', $data);
         }
 
         public function show($id){

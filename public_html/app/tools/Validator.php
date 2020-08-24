@@ -84,6 +84,5 @@ class Validator
         }
         return true;
     }
-
 }
 ?>

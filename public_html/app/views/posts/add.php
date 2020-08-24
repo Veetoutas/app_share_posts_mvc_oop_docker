@@ -4,6 +4,12 @@
 <div class="card card-body bg-light mt-5">
     <h2>Add Post</h2>
     <p>Create a post with this form</p>
+
+    <span id="error_message_custom"><?php foreach($errors as $error) :  ?></span>
+    <span><?php echo $error; ?></span>
+    <span><?php  endforeach; ?></span>
+    <br>
+
     <form action="<?php echo URL_ROOT; ?>/posts/add" method="post">
         <div class="form-group">
             <label for="title">Title: <sup>*</sup></label>
