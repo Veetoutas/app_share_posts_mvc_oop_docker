@@ -19,7 +19,7 @@
             </ul>
 
             <ul class="navbar-nav ml-auto">
-<!--                If User logged in-->
+                <!-- If User logged in-->
                 <?php if(isset($_SESSION['user_id'])) : ?>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URL_ROOT; ?>/users/logout">Logout</a>

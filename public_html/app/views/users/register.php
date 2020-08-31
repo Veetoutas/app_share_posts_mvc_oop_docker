@@ -5,7 +5,7 @@
             <div class="card card-body bg-light mt-5">
                 <h2>Create an account</h2>
                 <p>Please fill out this form to register</p>
-                <form action="<?php echo URL_ROOT; ?>/users/register" method="post">
+                <form action="<?php echo URL_ROOT; ?>/users/add" method="post">
 
                     <span id="error_message_custom"><?php foreach($errors as $error) :  ?></span>
                     <span><?php echo $error; ?></span>

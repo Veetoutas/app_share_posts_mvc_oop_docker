@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f17b7c72-d9bb-44d7-b041-28c3a080a451" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public_html/app/Helpers/UrlHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/share_posts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/share_posts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/bootstrap.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/bootstrap.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/controllers/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Controllers/Pages.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/controllers/Posts.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Controllers/Posts.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/controllers/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Controllers/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/helpers/session_helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Helpers/SessionHelper.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/helpers/url_helper.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/libraries/Controller.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Libraries/Controller.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/libraries/Core.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Libraries/Core.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/libraries/Database.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Libraries/Database.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/models/Post.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Models/Post.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/tools/Validator.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/Tools/Validator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/inc/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/inc/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/inc/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/inc/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/inc/navbar.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/inc/navbar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/pages/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/pages/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/posts/add.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/posts/add.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/posts/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/posts/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/users/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/users/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/app/views/users/register.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/app/views/users/register.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public_html/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public_html/public/index.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/public_html/composer.json</pharConfigPath>
+    <execution>
+      <executable path="composer" />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration">
+    <include_path>
+      <path value="$PROJECT_DIR$/public_html/vendor/composer" />
+    </include_path>
+  </component>
+  <component name="ProjectId" id="1gdIwRNxBaz6ahi0t6Wz4DjZBdM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f17b7c72-d9bb-44d7-b041-28c3a080a451" name="Default Changelist" comment="" />
+      <created>1598438280645</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1598438280645</updated>
+      <workItem from="1598438281970" duration="1082000" />
+      <workItem from="1598439393377" duration="8974000" />
+      <workItem from="1598509897311" duration="18954000" />
+      <workItem from="1598850594052" duration="13818000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="762" y="433" key="ComposerInitDialogKey" timestamp="1598439496336">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="762" y="433" key="ComposerInitDialogKey/0.0.1920.1040@0.0.1920.1040" timestamp="1598439496336" />
+    <state x="778" y="245" key="NewPhpClassDialog" timestamp="1598534985440">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="778" y="245" key="NewPhpClassDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598534985440" />
+    <state x="816" y="443" key="NewPhpFileDialog" timestamp="1598872074977">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="816" y="443" key="NewPhpFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598872074977" />
+    <state x="476" y="166" key="SettingsEditor" timestamp="1598439364578">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="476" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598439364578" />
+    <state x="670" y="260" width="579" height="578" key="find.popup" timestamp="1598858262871">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="670" y="260" width="579" height="578" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598858262871" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1598447806103">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598447806103" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1598530731141">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1598530731141" />
+  </component>
+</project>

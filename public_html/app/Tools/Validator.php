@@ -1,23 +1,25 @@
 <?php
 
+namespace VFramework\Tools;
+
+use VFramework\Libraries\Controller;
+use VFramework\Models\User;
+
 class Validator
 {
-
     public $errors = [];
 
     public function __construct()
     {
         $this->controller = new Controller();
-        $this->userModel = $this->controller->model('User');
+        $this->userModel = new User();
     }
-
 
     public function validate($data, $validateData = [])
     {
         foreach ($validateData as $item => $rules) {
             $this->passes($data[$item], $rules, $item);
         }
-
         // If errors[] consist of empty errors ' ', return true
         $noErrors = (count(array_unique($this->errors)) === 1);
 
@@ -26,7 +28,6 @@ class Validator
         }
         return false;
     }
-
 
     public function passes($value, $rules, $fieldName)
     {
@@ -39,7 +40,6 @@ class Validator
             $errors = $this->errors;
         }
     }
-
 
     public function required($value, $fieldName)
     {
@@ -68,7 +68,6 @@ class Validator
             return true;
     }
 
-
     public function passMatch($value) {
         if(trim($_POST['password']) != trim($_POST['confirm_password'])) {
             $this->errors[] = '- Passwords do not match' . '<br>';
@@ -85,4 +84,3 @@ class Validator
         return true;
     }
 }
-?>
