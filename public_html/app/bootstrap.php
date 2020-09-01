@@ -7,4 +7,3 @@ require_once 'config/config.php';
 
 // Load Helpers
 require_once 'Helpers/SessionHelper.php';
-require_once 'Helpers/Constants.php';

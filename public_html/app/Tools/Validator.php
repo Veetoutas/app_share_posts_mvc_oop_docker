@@ -7,6 +7,7 @@ use VFramework\Models\AbstractModel;
 use VFramework\Models\User;
 
 class Validator
+// tipo i sitos klases funkcija sita
 {
     public $errors = [];
     public function __construct(AbstractModel $model = null)
@@ -55,7 +56,7 @@ class Validator
      */
     public function required($value, $fieldName)
     {
-         if(empty($value)) {
+        if (empty($value)) {
              $this->errors[] = '- ' . ucfirst($fieldName) . ' is empty' . '<br>';
              return false;
         }
@@ -69,7 +70,7 @@ class Validator
      */
     public function minLen($value, $fieldName)
     {
-        if(strlen($value) < 6) {
+        if (strlen($value) < 6) {
             $this->errors[] = '- ' . ucfirst($fieldName) . ' must consist of at least 6 characters' . '<br>';
             return false;
         }
@@ -80,8 +81,8 @@ class Validator
      * @param $value
      * @return bool
      */
-    public function passwordsMatch($value) {
-        if(trim($_POST['password']) != trim($_POST['confirm_password'])) {
+    public function passwordsMatch(): bool {
+        if (trim($_POST['password']) != trim($_POST['confirm_password'])) {
             $this->errors[] = '- Passwords do not match' . '<br>';
             return false;
         }
@@ -93,8 +94,8 @@ class Validator
      * @param $fieldName
      * @return bool
      */
-    public function exists($value, $fieldName) {
-        if(!$this->model->findByEmail($value)) {
+    public function exists($value, $fieldName): bool {
+        if (!$this->model->findByEmail($value)) {
             $this->errors[] = '- User with that ' . $fieldName . ' does not exist' . '<br>';
             return false;
         }
@@ -106,11 +107,24 @@ class Validator
      * @param $fieldName
      * @return bool
      */
-    public function emailIsUnique($value, $fieldName) {
-        if($this->model->findByEmail($value)) {
+    public function emailIsUnique($value, $fieldName): bool {
+        if ($this->model->findByEmail($value)) {
             $this->errors[] = '- User with that ' . $fieldName . ' is already taken' . '<br>';
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param $value
+     * @param $fieldName
+     */
+    public function rightPassword($data)
+    {
+        if(password_verify($data['email'], $data['password'])) {
+            return true;
+        }
+        $this->errors[] = 'Password is incorrect'  . '<br>';
+        return false;
     }
 }

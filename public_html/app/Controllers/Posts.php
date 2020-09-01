@@ -23,6 +23,11 @@ class Posts extends Controller {
      */
     public $validator;
 
+    public const RULES = [
+        'title' => ['required'],
+        'body' => ['required']
+    ];
+
     /**
      * Posts constructor.
      * @param Validator $validator
@@ -62,7 +67,7 @@ class Posts extends Controller {
             ];
 
             // IF POST VALIDATION SUCCESSFUL
-            if ($this->validator->validate($data, POST_RULES)) {
+            if ($this->validator->validate($data, self::RULES)) {
                 // Check if posting was successful
                 if ($this->model->add($data)) {
                     flash('post_message', 'Post Added');

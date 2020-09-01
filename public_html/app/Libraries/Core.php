@@ -20,7 +20,7 @@ class Core
     public function __construct()
     {
         $url = $this->getUrl();
-        $url_shifted = array_shift($url);
+        $urlShifted = array_shift($url);
         // Look in Controllers for first value of URL
         if (file_exists(ROOT_DIR . self::CONTROLLERS_DIR . ucwords($url[0]) . '.php')) {
             // If exists, set it as controller

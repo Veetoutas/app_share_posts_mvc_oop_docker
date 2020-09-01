@@ -24,6 +24,19 @@ class Users extends Controller {
      */
     private $request;
 
+    public const LOGIN_RULES = [
+        'email' => ['required', 'exists'],
+        'password' => ['required', 'rightPassword']
+    ];
+
+    // nu va sitas
+
+    public const REGISTRATION_RULES = [
+        'email' => ['required', 'emailIsUnique'],
+        'password' => ['required'],
+        'confirm_password' => ['passwordsMatch']
+    ];
+
 
     /**
      * Users constructor.
@@ -38,7 +51,7 @@ class Users extends Controller {
 
     public function index()
     {
-        return $this->view('users/register');// paziurom ar veiks ok?k y
+        return $this->view('users/register');
     }
 
     // REGISTER
@@ -57,7 +70,7 @@ class Users extends Controller {
             ];
 
             // IF POST VALIDATION SUCCESSFUL
-            $validated = $this->validator->validate($data, REG_RULES);
+            $validated = $this->validator->validate($data, self::REGISTRATION_RULES);
             $errors = $this->validator->errors;
 
             if ($validated) {
@@ -90,7 +103,7 @@ class Users extends Controller {
             ];
 
             // IF POST VALIDATION SUCCESSFUL
-            $validated = $this->validator->validate($data, LOGIN_RULES);
+            $validated = $this->validator->validate($data, self::LOGIN_RULES);
 
             if ($validated) {
                 // Check and set logged in user

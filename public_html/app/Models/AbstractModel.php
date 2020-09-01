@@ -40,12 +40,12 @@ namespace VFramework\Models;
 
      /**
       * @param $data
-      * @return bool
+      * @return array
       */
-     public function get($data)
+     public function get($data): array
      {
          $columns = implode(', ', array_keys($data));  //get key(columns' names)
-         $values = implode(", :", array_keys($data));  //get values (values to be inserted)
+         $values = implode(", :", array_keys($data));
          $query = 'SELECT * FROM ' .$this->table. ' WHERE ' . ' '.$columns.' = :'.$values.'';
          $stmt = $this->db->prepare($query);
 
@@ -54,6 +54,9 @@ namespace VFramework\Models;
              $bindKey = sprintf(':%s', $key);
              $stmt->bindValue($bindKey, $value);
          }
-         return $stmt->execute();
+
+         $stmt->execute();
+
+         return $stmt->fetchAll();
      }
  }
