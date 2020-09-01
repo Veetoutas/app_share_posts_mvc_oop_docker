@@ -4,8 +4,9 @@ namespace VFramework\Helpers;
 
 define("REG_RULES",
     [
-        'email' => ['required', 'exists'],
-        'password' => ['required']
+        'email' => ['required', 'emailIsUnique'],
+        'password' => ['required'],
+        'confirm_password' => ['passwordsMatch']
     ]
 );
 

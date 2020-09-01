@@ -2,17 +2,18 @@
 
 namespace VFramework\Libraries;
 
-use VFramework\Models\Post;
+abstract class Controller {
 
-class Controller {
-    // Load view
+    /**
+     * @param $view
+     * @param array $data
+     * @param array $errors
+     */
     public function view($view, $data = [], $errors = []) {
         // Check for view file
         if(file_exists(ROOT_DIR . '/app/views/' . $view . '.php')) {
             require_once ROOT_DIR . '/app/views/' . $view . '.php';
         }
-        else {
-            die('View does not exist');
-        }
+            die('View does not exist or was deleted');
     }
 }

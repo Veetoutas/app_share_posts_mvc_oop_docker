@@ -3,44 +3,56 @@
 namespace VFramework\Tools;
 
 use VFramework\Libraries\Controller;
+use VFramework\Models\AbstractModel;
 use VFramework\Models\User;
 
 class Validator
 {
     public $errors = [];
-
-    public function __construct()
+    public function __construct(AbstractModel $model = null)
     {
-        $this->controller = new Controller();
-        $this->userModel = new User();
+        $this->model = $model;
     }
 
+    /**
+     * @param $data
+     * @param array $validateData
+     * @return bool
+     */
     public function validate($data, $validateData = [])
     {
         foreach ($validateData as $item => $rules) {
             $this->passes($data[$item], $rules, $item);
         }
         // If errors[] consist of empty errors ' ', return true
-        $noErrors = (count(array_unique($this->errors)) === 1);
-
-        if ($noErrors) {
+        if (empty($this->errors)) {
             return true;
         }
         return false;
     }
 
+    /**
+     * @param $value
+     * @param $rules
+     * @param $fieldName
+     */
     public function passes($value, $rules, $fieldName)
     {
         foreach ($rules as $rule) {
             $result = $this->{$rule}($value, $fieldName);
 
             if ($result) {
-                $this->errors[] = '';
+                continue;
             }
             $errors = $this->errors;
         }
     }
 
+    /**
+     * @param $value
+     * @param $fieldName
+     * @return bool
+     */
     public function required($value, $fieldName)
     {
          if(empty($value)) {
@@ -50,6 +62,11 @@ class Validator
              return true;
     }
 
+    /**
+     * @param $value
+     * @param $fieldName
+     * @return bool
+     */
     public function minLen($value, $fieldName)
     {
         if(strlen($value) < 6) {
@@ -57,18 +74,13 @@ class Validator
             return false;
         }
             return true;
-
     }
 
-    public function taken($value, $fieldName){
-        if($this->userModel->findByEmail($value)) {
-            $this->errors[] = '- ' . ucfirst($fieldName) . ' is already taken' . '<br>';
-            return false;
-        }
-            return true;
-    }
-
-    public function passMatch($value) {
+    /**
+     * @param $value
+     * @return bool
+     */
+    public function passwordsMatch($value) {
         if(trim($_POST['password']) != trim($_POST['confirm_password'])) {
             $this->errors[] = '- Passwords do not match' . '<br>';
             return false;
@@ -76,9 +88,27 @@ class Validator
             return true;
     }
 
+    /**
+     * @param $value
+     * @param $fieldName
+     * @return bool
+     */
     public function exists($value, $fieldName) {
-        if(!$this->userModel->findByEmail($value)) {
+        if(!$this->model->findByEmail($value)) {
             $this->errors[] = '- User with that ' . $fieldName . ' does not exist' . '<br>';
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @param $value
+     * @param $fieldName
+     * @return bool
+     */
+    public function emailIsUnique($value, $fieldName) {
+        if($this->model->findByEmail($value)) {
+            $this->errors[] = '- User with that ' . $fieldName . ' is already taken' . '<br>';
             return false;
         }
         return true;

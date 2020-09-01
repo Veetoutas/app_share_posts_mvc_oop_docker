@@ -23,7 +23,6 @@ class Posts extends Controller {
      */
     public $validator;
 
-
     /**
      * Posts constructor.
      * @param Validator $validator
@@ -38,24 +37,21 @@ class Posts extends Controller {
         $this->request = new Request();
     }
 
-
     public function index()
     {
-        // Get posts
-        $posts = $this->model->getAll();
-
-        $data = [
-            'posts' => $posts
-        ];
-
-        $this->view('posts/index', $data);
+        $this->view('posts/index', [
+            'posts' =>$this->model->getAll()
+        ]);
     }
 
+
     // ADD POST TO THE DATABASE
+    /**
+     * @param array $data
+     */
     public function add()
     {
-        if ($this->request->requested('POST'))
-        {
+        if ($this->request->requested('POST')) {
             // Sanitize POST array
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -66,33 +62,29 @@ class Posts extends Controller {
             ];
 
             // IF POST VALIDATION SUCCESSFUL
-            $validated = $this->validator->validate($data, POST_RULES);
-            $errors = $this->validator->errors;
-
-            if ($validated)
-            {
+            if ($this->validator->validate($data, POST_RULES)) {
                 // Check if posting was successful
-                $posted = $this->model->add($data);
-                if($posted){
+                if ($this->model->add($data)) {
                     flash('post_message', 'Post Added');
                     UrlHelper::redirect('posts');
                 }
             }
             // IF POST VALIDATION FAILS
-            $this->view('posts/add', $data, $errors);
+            $this->view('posts/add', $data, $this->validator->errors);
         }
 
         // IF NOT A POST METHOD SHOW AN EMPTY POST FORM
         $this->view('posts/add');
     }
 
-    // SHOW THE PAGE OF THE POST
+    // SHOW A SINGLE PAGE OF THE POST
+    /**
+     * @param $id
+     */
     public function show($id)
     {
-        $post = $this->model->getById($id);
-        $data = [
-            'post' => $post
-        ];
-        $this->view('posts/show', $data);
+        $this->view('posts/show', [
+            'post' => $this->model->getById($id)
+        ]);
     }
 }

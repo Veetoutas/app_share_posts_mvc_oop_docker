@@ -29,20 +29,21 @@ class Users extends Controller {
      * Users constructor.
      * @param Validator $validator
      */
-    public function __construct(Validator $validator) {
+    public function __construct(Validator $validator)
+    {
         $this->validator = $validator;
-        $this->model = new User(new Validator());
+        $this->model = new User();
         $this->request = new Request();
     }
 
     public function index()
     {
-        return $this->view('users/register');
+        return $this->view('users/register');// paziurom ar veiks ok?k y
     }
 
     // REGISTER
-    public function add() {
-
+    public function add()
+    {
         // IF POST METHOD
         if ($this->request->requested('POST')) {
             // Sanitize POST data
@@ -76,7 +77,8 @@ class Users extends Controller {
 
 
     // LOGIN
-    public function login() {
+    public function login()
+    {
         // IF POST METHOD
         if ($this->request->requested('POST')) {
             // Sanitize POST data
@@ -109,14 +111,16 @@ class Users extends Controller {
         /**
          * @param $user
          */
-        public function createUserSession($user) {
+        public function createUserSession($user)
+        {
             $_SESSION['user_id'] = $user->id;
             $_SESSION['user_email'] = $user->email;
             $_SESSION['user_name'] = $user->name;
             UrlHelper::redirect('posts');
         }
 
-        public function logout() {
+        public function logout()
+        {
             unset($_SESSION['user_id']);
             unset($_SESSION['user_email']);
             unset($_SESSION['user_name']);
