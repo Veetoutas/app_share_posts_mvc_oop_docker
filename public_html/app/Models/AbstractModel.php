@@ -2,6 +2,7 @@
 
 namespace VFramework\Models;
 
+ use PDO;
  use VFramework\Libraries\Database;
 
  abstract class AbstractModel
@@ -37,7 +38,6 @@ namespace VFramework\Models;
          return $stmt->execute();
      }
 
-
      /**
       * @param $data
       * @return array
@@ -56,7 +56,21 @@ namespace VFramework\Models;
          }
 
          $stmt->execute();
+         return $stmt->fetchAll();
+     }
 
+     public function getBy($data, $fetchSingle = true)
+     {
+         $columns = implode(', ', array_keys($data));  //get key(columns' names)
+         $values = implode(", :", array_values($data));
+         $query = 'SELECT * FROM ' .$this->table. ' WHERE ' . ' '.$columns.' = :'.$columns.'';
+         $stmt = $this->db->prepare($query);
+         $stmt->bindValue(':'.$columns, $values);
+         $stmt->execute();
+
+         if ($fetchSingle) {
+             return $stmt->fetch(PDO::FETCH_OBJ);
+         }
          return $stmt->fetchAll();
      }
  }

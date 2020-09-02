@@ -12,20 +12,6 @@ class Post extends AbstractModel
     protected $table = 'posts';
 
     /**
-     * @param $id
-     * @return mixed
-     */
-    public function getById($id)
-    {
-        $query = 'SELECT * FROM posts WHERE id = :id';
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':id', $id);
-        $stmt->execute();
-        $row = $stmt->fetch(PDO::FETCH_OBJ);
-        return $row;
-    }
-
-    /**
      * @return array
      *
      */

@@ -26,10 +26,8 @@ class Users extends Controller {
 
     public const LOGIN_RULES = [
         'email' => ['required', 'exists'],
-        'password' => ['required', 'rightPassword']
+        'password' => ['required']
     ];
-
-    // nu va sitas
 
     public const REGISTRATION_RULES = [
         'email' => ['required', 'emailIsUnique'],

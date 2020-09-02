@@ -5,6 +5,7 @@ namespace VFramework\Controllers;
 use VFramework\Helpers\UrlHelper;
 use VFramework\Libraries\Controller;
 use VFramework\Models\Post;
+use VFramework\Models\User;
 use VFramework\Tools\Request;
 use VFramework\Tools\Validator;
 
@@ -22,6 +23,10 @@ class Posts extends Controller {
      * @var Validator
      */
     public $validator;
+    /**
+     * @var User
+     */
+    private $userModel;
 
     public const RULES = [
         'title' => ['required'],
@@ -31,6 +36,7 @@ class Posts extends Controller {
     /**
      * Posts constructor.
      * @param Validator $validator
+     * @param User $userModel
      */
     public function __construct(Validator $validator)
     {
@@ -82,14 +88,44 @@ class Posts extends Controller {
         $this->view('posts/add');
     }
 
+
+    public function edit($id)
+    {
+        if ($this->request->requested('POST')) {
+            // Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'title' => trim($_POST['title']),
+                'body' => trim($_POST['body']),
+                'user_id' => $_SESSION['user_id']
+            ];
+
+            // IF POST VALIDATION SUCCESSFUL
+            if ($this->validator->validate($data, self::RULES)) {
+                // Check if posting was successful
+                if ($this->model->add($data)) {
+                    flash('post_message', 'Post Added');
+                    UrlHelper::redirect('posts');
+                }
+            }
+            // IF POST VALIDATION FAILS
+            $this->view('posts/add', $data, $this->validator->errors);
+        }
+
+        // IF NOT A POST METHOD SHOW AN EMPTY POST FORM
+        $this->view('posts/edit');
+    }
+
     // SHOW A SINGLE PAGE OF THE POST
-    /**
-     * @param $id
-     */
     public function show($id)
     {
+        $this->userModel = new User();
+        $post = $this->model->getBy(['id' => $id]);
         $this->view('posts/show', [
-            'post' => $this->model->getById($id)
+            'post' => $post,
+            'user' => $this->userModel->getBy(['id' => $post->user_id])
         ]);
     }
+
 }
