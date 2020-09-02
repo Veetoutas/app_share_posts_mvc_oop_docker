@@ -112,9 +112,17 @@ class Posts extends Controller {
             // IF POST VALIDATION FAILS
             $this->view('posts/add', $data, $this->validator->errors);
         }
-
+        // Get existing post from model
+        $post = $this->model->getBy(['id' => $id]);
+        if ($post->user_id != $_SESSION['user_id']) {
+            UrlHelper::redirect('posts');
+        }
         // IF NOT A POST METHOD SHOW AN EMPTY POST FORM
-        $this->view('posts/edit');
+        $this->view('posts/edit', [
+            'id' => $id,
+            'title' => $post->title,
+            'body' => $post->body
+        ]);
     }
 
     // SHOW A SINGLE PAGE OF THE POST
@@ -127,5 +135,4 @@ class Posts extends Controller {
             'user' => $this->userModel->getBy(['id' => $post->user_id])
         ]);
     }
-
 }
