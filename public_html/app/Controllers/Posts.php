@@ -128,11 +128,11 @@ class Posts extends Controller {
     // SHOW A SINGLE PAGE OF THE POST
     public function show($id)
     {
-        $this->userModel = new User();
+        $userModel = new User();
         $post = $this->model->getBy(['id' => $id]);
         $this->view('posts/show', [
             'post' => $post,
-            'user' => $this->userModel->getBy(['id' => $post->user_id])
+            'user' => $userModel->getBy(['id' => $post->user_id])
         ]);
     }
 }
