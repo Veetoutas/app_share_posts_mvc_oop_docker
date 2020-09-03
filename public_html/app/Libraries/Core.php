@@ -6,15 +6,20 @@ use VFramework\Controllers\Posts;
 use VFramework\Models\User;
 use VFramework\Tools\Validator;
 
-/**
- * Class Core
- * @package VFramework\Libraries
- */
 class Core
 {
     public const CONTROLLERS_DIR = '/app/Controllers/';
+    /**
+     * @var mixed|string
+     */
     protected $currentController = 'Pages';
+    /**
+     * @var mixed|string
+     */
     protected $currentMethod = 'index';
+    /**
+     * @var array|false|string[]
+     */
     protected $params = [];
 
     public function __construct()

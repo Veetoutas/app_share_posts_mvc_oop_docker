@@ -9,7 +9,8 @@ use VFramework\Tools\Request;
 use VFramework\Tools\Validator;
 
 
-class Users extends Controller {
+class Users extends Controller
+{
 
     /**
      * @var mixed
@@ -35,7 +36,6 @@ class Users extends Controller {
         'confirm_password' => ['passwordsMatch']
     ];
 
-
     /**
      * Users constructor.
      * @param Validator $validator
@@ -53,6 +53,9 @@ class Users extends Controller {
     }
 
     // REGISTER
+    /**
+     * @param array $data
+     */
     public function add()
     {
         // IF POST METHOD

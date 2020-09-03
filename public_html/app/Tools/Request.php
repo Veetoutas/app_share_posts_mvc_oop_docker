@@ -4,8 +4,15 @@ namespace VFramework\Tools;
 
 class Request
 {
+    /**
+     * @var string
+     */
     private $method = '';
 
+    /**
+     * @param $method
+     * @return bool
+     */
     public function requested($method)
     {
         // POST

@@ -42,7 +42,7 @@ class User extends AbstractModel
         // Store the hashed password of a user into a variable
         $hashed_password = $row->password;
         // If hashed password and the entered password matches, return the row of a user
-        if(password_verify($password, $hashed_password)) {
+        if (password_verify($password, $hashed_password)) {
             return $row;
         }
         return false;
@@ -61,7 +61,7 @@ class User extends AbstractModel
         $stmt->execute();
         $stmt->fetchAll();
         // Check row
-        if($stmt->rowCount() > 0) {
+        if ($stmt->rowCount() > 0) {
             return true;
         }
             return false;

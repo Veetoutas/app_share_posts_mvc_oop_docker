@@ -5,12 +5,12 @@ namespace VFramework\Controllers;
 use VFramework\Helpers\UrlHelper;
 use VFramework\Libraries\Controller;
 
-class Pages extends Controller{
-
+class Pages extends Controller
+{
     public function index()
     {
 
-        if(isLoggedIn()) {
+        if (isLoggedIn()) {
             UrlHelper::redirect('posts');
         }
 

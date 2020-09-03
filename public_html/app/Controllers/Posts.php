@@ -9,24 +9,24 @@ use VFramework\Models\User;
 use VFramework\Tools\Request;
 use VFramework\Tools\Validator;
 
-class Posts extends Controller {
+class Posts extends Controller
+{
 
     /**
      * @var Post
      */
-    private $model;
+    private Post $model;
     /**
      * @var Request
      */
-    private $request;
+    private Request $request;
     /**
      * @var Validator
      */
-    public $validator;
+    public Validator $validator;
     /**
      * @var User
      */
-    private $userModel;
 
     public const RULES = [
         'title' => ['required'],
@@ -36,7 +36,6 @@ class Posts extends Controller {
     /**
      * Posts constructor.
      * @param Validator $validator
-     * @param User $userModel
      */
     public function __construct(Validator $validator)
     {
@@ -126,6 +125,10 @@ class Posts extends Controller {
     }
 
     // SHOW A SINGLE PAGE OF THE POST
+
+    /**
+     * @param $id
+     */
     public function show($id)
     {
         $userModel = new User();

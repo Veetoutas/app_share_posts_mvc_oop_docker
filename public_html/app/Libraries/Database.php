@@ -3,6 +3,7 @@
 namespace VFramework\Libraries;
 
 use PDO;
+use PDOException;
 
 class Database extends PDO
 {

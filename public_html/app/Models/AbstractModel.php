@@ -59,6 +59,11 @@ namespace VFramework\Models;
          return $stmt->fetchAll();
      }
 
+     /**
+      * @param $data
+      * @param bool $fetchSingle
+      * @return array|mixed
+      */
      public function getBy($data, $fetchSingle = true)
      {
          $columns = implode(', ', array_keys($data));  //get key(columns' names)

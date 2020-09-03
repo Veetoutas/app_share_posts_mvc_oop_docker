@@ -1,7 +1,13 @@
 <?php
 session_start();
 
-function flash($name = '', $message = '', $class = 'alert alert-success'){
+/**
+ * @param string $name
+ * @param string $message
+ * @param string $class
+ */
+function flash($name = '', $message = '', $class = 'alert alert-success')
+{
     if(!empty($name)){
         if(!empty($message) && empty($_SESSION[$name])){
             if(!empty($_SESSION[$name])){
@@ -23,7 +29,11 @@ function flash($name = '', $message = '', $class = 'alert alert-success'){
     }
 }
 
-function isLoggedIn(){
+/**
+ * @return bool
+ */
+function isLoggedIn()
+{
     if(isset($_SESSION['user_id'])){
         return true;
     }

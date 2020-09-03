@@ -2,7 +2,8 @@
 
 namespace VFramework\Libraries;
 
-abstract class Controller {
+abstract class Controller
+{
 
     /**
      * @param $view
