@@ -4,6 +4,7 @@
 namespace VFramework\Models;
 
 use PDO;
+use stdClass;
 use VFramework\Tools\Validator;
 
 class User extends AbstractModel
@@ -32,17 +33,23 @@ class User extends AbstractModel
      */
     public function login (string $email, string $password)
     {
-        // na ir persikelk
         $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
         $stmt->bindValue(':email', $email);
         $stmt->execute();
-//            $user = $this->validator->rightPassword(['email' => $email, 'password' => $password]);
         // Take the user row with the same user email
         $row = $stmt->fetch(PDO::FETCH_OBJ);
+
+        $passwordsMatch = $this->validator->rightPassword([
+            'password' => $password,
+            'password_hash' => $row->password
+        ]);
+
+        if (!$this->validator->isValid()) {
+            throw new \Exception($this->validator->getErrors()[0]);
+        }
         // Store the hashed password of a user into a variable
-        $hashed_password = $row->password;
         // If hashed password and the entered password matches, return the row of a user
-        if (password_verify($password, $hashed_password)) {
+        if ($passwordsMatch) {
             return $row;
         }
         return false;

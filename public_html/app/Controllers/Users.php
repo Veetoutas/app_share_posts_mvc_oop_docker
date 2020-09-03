@@ -30,7 +30,9 @@ class Users extends Controller
         'required',
         'exists'
         ],
-        'password' => ['required']
+        'password' => [
+        'required'
+        ]
     ];
 
     public const REGISTRATION_RULES = [
@@ -108,10 +110,15 @@ class Users extends Controller
 
             // IF POST VALIDATION SUCCESSFUL
             $validated = $this->validator->validate($data, self::LOGIN_RULES);
-
             if ($validated) {
                 // Check and set logged in user
-                $loggedInUser = $this->model->login($data['email'], $data['password']);
+                try {
+                    $loggedInUser = $this->model->login($data['email'], $data['password']);
+
+                } catch (\Exception $exception) {
+                    $error = [$exception->getMessage()];
+                    $this->view('users/login', $data, $error);
+                }
                 // Create Session
                 $this->createUserSession($loggedInUser);
             }

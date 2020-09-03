@@ -124,7 +124,6 @@ class Posts extends Controller
     }
 
     // SHOW A SINGLE PAGE OF THE POST
-
     /**
      * @param $id
      */

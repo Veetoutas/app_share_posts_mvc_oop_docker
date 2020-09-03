@@ -126,17 +126,31 @@ class Validator
     }
 
     /**
-     * @param $data
+     * @param array $data
      * @return bool
      */
     public function rightPassword(array $data): bool
     {
-        $email = $data['email'];
-        $pass = $this->model->findByEmail($email);
-        if(password_verify($data['password'], $pass->password)) {
+        if (password_verify($data['password'], $data['password_hash'])) {
             return true;
         }
         $this->errors[] = 'Password is incorrect'  . '<br>';
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isValid()
+    {
+       return empty($this->errors);
+    }
+
+    /**
+     * @return array
+     */
+    public function getErrors(): array
+    {
+        return $this->errors;
     }
 }
