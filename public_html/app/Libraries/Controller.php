@@ -10,9 +10,10 @@ abstract class Controller
      * @param array $data
      * @param array $errors
      */
-    public function view($view, $data = [], $errors = [])  {
+    public function view(string $view, array $data = [], array $errors = []): void
+    {
         // Check for view file
-        if(file_exists(ROOT_DIR . '/app/views/' . $view . '.php')) {
+        if (file_exists(ROOT_DIR . '/app/views/' . $view . '.php')) {
             require_once ROOT_DIR . '/app/views/' . $view . '.php';
             exit();
         }

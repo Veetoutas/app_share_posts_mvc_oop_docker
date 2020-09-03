@@ -12,10 +12,11 @@ class Post extends AbstractModel
     protected $table = 'posts';
 
     // Gets ALL posts as objects and joins posts id to users id
+
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         $query = '
                 SELECT *,

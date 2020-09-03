@@ -7,7 +7,7 @@ class UrlHelper
     /**
      * @param $page
      */
-    static function redirect($page)
+    public static function redirect(string $page): void
     {
         header ('location:'. URL_ROOT. '/'. $page);
     }

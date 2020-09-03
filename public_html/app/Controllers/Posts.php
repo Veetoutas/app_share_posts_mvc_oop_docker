@@ -39,7 +39,7 @@ class Posts extends Controller
      */
     public function __construct(Validator $validator)
     {
-        if(!isLoggedIn()){
+        if (!isLoggedIn()) {
             UrlHelper::redirect('users/login');
         }
         $this->validator = $validator;
@@ -47,19 +47,16 @@ class Posts extends Controller
         $this->request = new Request();
     }
 
-    public function index()
+    public function index(): void
     {
         $this->view('posts/index', [
-            'posts' =>$this->model->getAll()
+            'posts' => $this->model->getAll()
         ]);
     }
 
 
     // ADD POST TO THE DATABASE
-    /**
-     * @param array $data
-     */
-    public function add()
+    public function add(): void
     {
         if ($this->request->requested('POST')) {
             // Sanitize POST array
@@ -87,8 +84,10 @@ class Posts extends Controller
         $this->view('posts/add');
     }
 
-
-    public function edit($id)
+    /**
+     * @param $id
+     */
+    public function edit(int $id): void
     {
         if ($this->request->requested('POST')) {
             // Sanitize POST array
@@ -113,7 +112,7 @@ class Posts extends Controller
         }
         // Get existing post from model
         $post = $this->model->getBy(['id' => $id]);
-        if ($post->user_id != $_SESSION['user_id']) {
+        if ($post->user_id !== $_SESSION['user_id']) {
             UrlHelper::redirect('posts');
         }
         // IF NOT A POST METHOD SHOW AN EMPTY POST FORM
@@ -129,7 +128,7 @@ class Posts extends Controller
     /**
      * @param $id
      */
-    public function show($id)
+    public function show($id): void
     {
         $userModel = new User();
         $post = $this->model->getBy(['id' => $id]);

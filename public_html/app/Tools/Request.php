@@ -10,10 +10,10 @@ class Request
     private $method = '';
 
     /**
-     * @param $method
+     * @param string $method
      * @return bool
      */
-    public function requested($method)
+    public function requested(string $method): bool
     {
         // POST
         if ($_SERVER['REQUEST_METHOD'] == $method) {

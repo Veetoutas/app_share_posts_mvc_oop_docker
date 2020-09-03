@@ -7,7 +7,7 @@ use VFramework\Libraries\Controller;
 
 class Pages extends Controller
 {
-    public function index()
+    public function index(): void
     {
 
         if (isLoggedIn()) {
@@ -21,7 +21,7 @@ class Pages extends Controller
 
     }
 
-    public function about()
+    public function about(): void
     {
         $this->view('pages/about', [
             'title' => 'About page',

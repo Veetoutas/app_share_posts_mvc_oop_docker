@@ -21,8 +21,9 @@ namespace VFramework\Models;
 
      /**
       * @param array $data
+      * @return bool
       */
-     public function add($data)
+     public function add(array $data): bool
      {
          unset($data['confirm_password']);
          $columns = implode(', ', array_keys($data));  //get key(columns' names)
@@ -39,10 +40,10 @@ namespace VFramework\Models;
      }
 
      /**
-      * @param $data
+      * @param array $data
       * @return array
       */
-     public function get($data): array
+     public function get(array $data): array
      {
          $columns = implode(', ', array_keys($data));  //get key(columns' names)
          $values = implode(", :", array_keys($data));
@@ -60,11 +61,11 @@ namespace VFramework\Models;
      }
 
      /**
-      * @param $data
+      * @param array $data
       * @param bool $fetchSingle
       * @return array|mixed
       */
-     public function getBy($data, $fetchSingle = true)
+     public function getBy(array $data, bool $fetchSingle = true)
      {
          $columns = implode(', ', array_keys($data));  //get key(columns' names)
          $values = implode(", :", array_values($data));

@@ -27,7 +27,7 @@ class Validator
      * @param array $validateData
      * @return bool
      */
-    public function validate(array $data, $validateData = []): bool
+    public function validate(array $data, array $validateData = []): bool
     {
         foreach ($validateData as $item => $rules) {
             $this->passes($data[$item], $rules, $item);

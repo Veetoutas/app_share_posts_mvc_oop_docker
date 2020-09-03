@@ -26,12 +26,18 @@ class Users extends Controller
     private $request;
 
     public const LOGIN_RULES = [
-        'email' => ['required', 'exists'],
+        'email' => [
+        'required',
+        'exists'
+        ],
         'password' => ['required']
     ];
 
     public const REGISTRATION_RULES = [
-        'email' => ['required', 'emailIsUnique'],
+        'email' => [
+        'required',
+        'emailIsUnique'
+        ],
         'password' => ['required'],
         'confirm_password' => ['passwordsMatch']
     ];
@@ -47,16 +53,13 @@ class Users extends Controller
         $this->request = new Request();
     }
 
-    public function index()
+    public function index(): void
     {
-        return $this->view('users/register');
+        $this->view('users/register');
     }
 
     // REGISTER
-    /**
-     * @param array $data
-     */
-    public function add()
+    public function add(): void
     {
         // IF POST METHOD
         if ($this->request->requested('POST')) {
@@ -91,7 +94,7 @@ class Users extends Controller
 
 
     // LOGIN
-    public function login()
+    public function login(): void
     {
         // IF POST METHOD
         if ($this->request->requested('POST')) {
@@ -120,25 +123,25 @@ class Users extends Controller
 
         // IF NOT A POST METHOD SHOW AN EMPTY FORM
         $this->view('users/login');
-        }
-
-        /**
-         * @param $user
-         */
-        public function createUserSession($user)
-        {
-            $_SESSION['user_id'] = $user->id;
-            $_SESSION['user_email'] = $user->email;
-            $_SESSION['user_name'] = $user->name;
-            UrlHelper::redirect('posts');
-        }
-
-        public function logout()
-        {
-            unset($_SESSION['user_id']);
-            unset($_SESSION['user_email']);
-            unset($_SESSION['user_name']);
-            session_destroy();
-            UrlHelper::redirect('users/login');
-        }
     }
+
+    /**
+     * @param $user
+     */
+    public function createUserSession($user): void
+    {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['user_email'] = $user->email;
+        $_SESSION['user_name'] = $user->name;
+        UrlHelper::redirect('posts');
+    }
+
+    public function logout(): void
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_email']);
+        unset($_SESSION['user_name']);
+        session_destroy();
+        UrlHelper::redirect('users/login');
+    }
+}

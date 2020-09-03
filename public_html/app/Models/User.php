@@ -30,7 +30,7 @@ class User extends AbstractModel
      * @param string $password
      * @return bool|mixed
      */
-    public function login ($email, $password)
+    public function login (string $email, string $password)
     {
         // na ir persikelk
         $stmt = $this->db->prepare('SELECT * FROM users WHERE email = :email LIMIT 1');
@@ -53,7 +53,7 @@ class User extends AbstractModel
      * @param $email
      * @return bool
      */
-    public function findByEmail($email): bool
+    public function findByEmail(string $email): bool
     {
         $query = "SELECT * FROM users WHERE email = :email";
         $stmt = $this->db->prepare($query);

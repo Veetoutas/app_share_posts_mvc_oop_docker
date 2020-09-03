@@ -38,13 +38,14 @@ class Database extends PDO
         $dsn = "mysql:host=$this->host;dbname=$this->dbname;port=$this->port";
         $options = array(
             PDO::ATTR_PERSISTENT => true,
-            PDO::ATTR_ERRMODE => PDO:: ERRMODE_EXCEPTION,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 
         );
         // Create PDO instance
         try {
             parent::__construct($dsn, $this->user, $this->pass, $options);
-        } catch (PDOException $e) {
+        }
+        catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;
         }
