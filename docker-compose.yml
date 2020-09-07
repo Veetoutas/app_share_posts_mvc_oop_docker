@@ -15,17 +15,18 @@ services:
       - frontend
       - backend
     ports:
-      - "8080:80"
+      - "8081:80"
     volumes:
       - ./public_html/:/var/www/html/
   mysql:
     image: mariadb
     ports:
-      - "3306:3306"
+      - "3307:3306"
     networks:
       - backend
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
+      - PMA_HOST=mysql
 networks:
   frontend:
   backend:
