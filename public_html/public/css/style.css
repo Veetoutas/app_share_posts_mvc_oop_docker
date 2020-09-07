@@ -15,3 +15,7 @@ body {
 #error_message_custom {
     color: red!important;
  }
+
+#session-user-name {
+    color: rgba(41, 241, 195, 1);
+}

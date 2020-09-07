@@ -143,6 +143,7 @@ class Users extends Controller
         UrlHelper::redirect('posts');
     }
 
+    // Logout a user and destroy session
     public function logout(): void
     {
         unset($_SESSION['user_id']);

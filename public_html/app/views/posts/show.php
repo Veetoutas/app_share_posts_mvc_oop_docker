@@ -3,7 +3,6 @@
 <a href="<?php echo URL_ROOT; ?>/posts" class="btn btn-light"><i class="fa fa-backward"> Back</i></a>
 <br>
 <h1><?php echo $data['post']->title; ?></h1>
-<?php //var_dump($data['user']); die; ?>
 <div class="bg-secondary text-white p-2 mb-3">
     Written by: "<?php echo $data['user']->name; ?>" on <?php echo $data['post']->created_at; ?>
 </div>

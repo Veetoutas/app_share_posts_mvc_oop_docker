@@ -136,4 +136,25 @@ class Posts extends Controller
             'user' => $userModel->getBy(['id' => $post->user_id])
         ]);
     }
+
+    /**
+     * @param $id
+     */
+    public function delete($id): void
+    {
+        // If request method is 'POST'
+        if ($this->request->requested('POST')) {
+            // Try to delete the post and catch errors if something went wrond
+            try {
+                $this->model->delete(['id' => $id]);
+                flash('post_message', 'Post deleted successfully');
+                UrlHelper::redirect('posts');
+            } catch (\Exception $exception) {
+                flash('post_message', $exception->getMessage());
+                UrlHelper::redirect('posts');
+            }
+        }
+        // If request method is else but 'POST' just redirect to Posts page
+        UrlHelper::redirect('posts');
+    }
 }
