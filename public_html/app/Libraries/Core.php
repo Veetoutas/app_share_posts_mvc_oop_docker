@@ -8,6 +8,8 @@ use VFramework\Tools\Validator;
 
 class Core
 {
+    public const NAMESPACE = 'VFramework\\Controllers\\';
+
     public const CONTROLLERS_DIR = '/app/Controllers/';
     /**
      * @var mixed|string
@@ -22,27 +24,10 @@ class Core
      */
     protected $params = [];
 
-    public function __construct()
-    {
-        // Get the URL
-        $url = $this->getUrl();
-        $urlShifted = array_shift($url);
-        // Set Controller based on URL
-        $url = $this->setController($url);
-        // Name the Class to which the URL is targeting
-        $className = 'VFramework\\Controllers\\' . ucfirst($this->currentController);
-        // Instantiate the class
-        $this->currentController = new $className(
-            new Validator(new User())
-        );
-        // Set the Method based on URL
-        $url = $this->setMethod($url);
-        // Get params
-        $this->params = $url ? array_values($url) : [];
-        // Call a callback with array of params
-        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
-    }
 
+    public function __construct() {
+        $this->callRequestedUrl();
+    }
     /**
      * @return false|string[]
      */
@@ -92,5 +77,32 @@ class Core
             }
         }
         return [];
+    }
+
+    /**
+     * @return bool
+     */
+    public function callRequestedUrl(): bool
+    {
+        // Get the URL
+        $url = $this->getUrl();
+        $urlShifted = array_shift($url);
+        // Set Controller based on URL
+        $url = $this->setController($url);
+        // Name the Class to which the URL is targeting
+        $className = self::NAMESPACE . ucfirst($this->currentController);
+        // Instantiate the class
+        $this->currentController = new $className(
+            new Validator(new User())
+        );
+        // Set the Method based on URL
+        $url = $this->setMethod($url);
+        // Get params
+        $this->params = $url ? array_values($url) : [];
+        // Call a callback with array of params
+        if (call_user_func_array([$this->currentController, $this->currentMethod], $this->params)) {
+            return true;
+        }
+        return false;
     }
 }
