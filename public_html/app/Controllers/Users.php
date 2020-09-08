@@ -67,6 +67,7 @@ class Users extends Controller
         if ($this->request->requested('POST')) {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
             // Init data
             $data = [
                 'name' => trim($_POST['name']),
@@ -74,7 +75,6 @@ class Users extends Controller
                 'password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password'])
             ];
-
             // IF POST VALIDATION SUCCESSFUL
             $validated = $this->validator->validate($data, self::REGISTRATION_RULES);
             $errors = $this->validator->errors;
@@ -82,6 +82,7 @@ class Users extends Controller
             if ($validated) {
                 // Validated
                 $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+                unset($data['confirm_password']);
                 // Register user
                 if($this->model->add($data)) {
                     flash('register_success', 'You are registered and can log in');

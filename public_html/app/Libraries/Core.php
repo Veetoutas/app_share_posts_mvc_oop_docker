@@ -8,7 +8,7 @@ use VFramework\Tools\Validator;
 
 class Core
 {
-    public const NAMESPACE = 'VFramework\\Controllers\\';
+    public const CONTROLLERS_NAMESPACE = 'VFramework\\Controllers\\';
 
     public const CONTROLLERS_DIR = '/app/Controllers/';
     /**
@@ -90,7 +90,7 @@ class Core
         // Set Controller based on URL
         $url = $this->setController($url);
         // Name the Class to which the URL is targeting
-        $className = self::NAMESPACE . ucfirst($this->currentController);
+        $className = self::CONTROLLERS_NAMESPACE . ucfirst($this->currentController);
         // Instantiate the class
         $this->currentController = new $className(
             new Validator(new User())
