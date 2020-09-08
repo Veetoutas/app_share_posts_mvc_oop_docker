@@ -28,4 +28,14 @@ class Pages extends Controller
             'description' => 'App to share posts with other users'
         ]);
     }
+
+    public function dashboard(): void
+    {
+        $this->view('pages/dashboard');
+    }
+
+    public function countries(): void
+    {
+        $this->view('pages/countries');
+    }
 }

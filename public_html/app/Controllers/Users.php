@@ -141,6 +141,7 @@ class Users extends Controller
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
+        $_SESSION['user_role'] = $user->user_role;
         UrlHelper::redirect('posts');
     }
 
@@ -150,6 +151,7 @@ class Users extends Controller
         unset($_SESSION['user_id']);
         unset($_SESSION['user_email']);
         unset($_SESSION['user_name']);
+        unset($_SESSION['user_role']);
         session_destroy();
         UrlHelper::redirect('users/login');
     }

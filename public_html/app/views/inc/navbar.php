@@ -16,6 +16,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URL_ROOT; ?>/pages/about">About</a>
                 </li>
+                <?php if ($_SESSION['user_role'] == 'admin') : ?>
+                    <li class="nav-item">
+                        <a href="<?php URL_ROOT; ?>/pages/dashboard" class="ml-2 mr-2 btn btn-primary add-post-btn">
+                            <i class="far fa-star" aria-hidden="true"></i> Admin dashboard
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
 
             <ul class="navbar-nav ml-auto">
