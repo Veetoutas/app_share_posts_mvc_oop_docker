@@ -1,7 +1,11 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<a href="<?php echo URL_ROOT;?>/posts/edit/<?php echo $data['post']->id; ?>" class="mr-2 btn btn-primary">
-    <i class="fas fa-globe mr-1"></i> Fetch Countries
-</a>
+<form action="<?php echo URL_ROOT; ?>/city/callApi" method="post">
+    <div class="row">
+        <div class="col-md-2">
+            <input type="submit" value="Fetch Countries" class="btn btn-success btn-block">
+        </div>
+    </div>
+</form>
 
 <?php require APPROOT . '/views/inc/footer.php'; ?>
