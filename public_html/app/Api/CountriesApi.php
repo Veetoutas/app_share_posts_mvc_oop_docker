@@ -4,12 +4,10 @@
 namespace VFramework\Api;
 
 
-use Client;
-
-class CitiesApi
+class CountriesApi
 {
     const ENDPOINT_ALL = '/all';
-    const ENDPOINT_SOMETHING = '/something'
+
     /**
      * @var Client
      */
@@ -20,15 +18,11 @@ class CitiesApi
         $this->client = $client;
     }
 
+    /**
+     * @return mixed
+     */
     public function getCountries()
     {
-        $response = $this->client->get(self::ENDPOINT_ALL);
-
+         return $response = $this->client->getRequest(self::ENDPOINT_ALL);
     }
-
-    public function getSomething()
-    {
-        $response = $this->client->get(self::ENDPOINT_SOMETHING); // thats all
-    }
-
 }

@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
-<form action="<?php echo URL_ROOT; ?>/city/callApi" method="post">
+<form action="<?php echo URL_ROOT; ?>/countries/countriesApi" method="post">
     <div class="row">
         <div class="col-md-2">
             <input type="submit" value="Fetch Countries" class="btn btn-success btn-block">

@@ -25,7 +25,6 @@ class User extends AbstractModel
      */
     protected $table = 'users';
 
-    // Login User
     /**
      * @param string $email
      * @param string $password
@@ -53,24 +52,5 @@ class User extends AbstractModel
             return $row;
         }
         return false;
-    }
-
-    // Find user by email
-    /**
-     * @param $email
-     * @return bool
-     */
-    public function findByEmail(string $email): bool
-    {
-        $query = "SELECT * FROM users WHERE email = :email";
-        $stmt = $this->db->prepare($query);
-        $stmt->bindValue(':email', $email);
-        $stmt->execute();
-        $stmt->fetchAll();
-        // Check row
-        if ($stmt->rowCount() > 0) {
-            return true;
-        }
-            return false;
     }
 }
