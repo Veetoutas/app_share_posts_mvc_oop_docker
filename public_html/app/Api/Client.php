@@ -4,51 +4,51 @@ namespace VFramework\Api;
 
 class Client
 {
+
     /**
      * Client constructor.
-     * @param $api
+     * @param string $api
      */
-    public function __construct($api)
+    public function __construct(string $api)
     {
         $this->api = $api;
     }
 
     /**
-     * @param $endPoint
-     * @return bool|string
-     */
-    public function postRequest($endPoint)
-    {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $this->api . $endPoint);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $this->getPostData());
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $server_output = curl_exec($ch);
-        $response = json_decode($server_output, true);
-        curl_close ($ch);
-        return $server_output;
-    }
-
-    /**
-     * @param $endPoint
+     * @param string $endPoint
      * @return mixed
      */
-    public function getRequest($endPoint)
+    public function postRequest(string $endPoint)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$this->api . $endPoint);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $server_output = curl_exec($ch);
-        $response = json_decode($server_output, true);
-        curl_close ($ch);
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL, $this->api . $endPoint);
+        curl_setopt($curlHandle, CURLOPT_POST, 1);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlHandle,CURLOPT_FAILONERROR,true);
+        $response = curl_exec($curlHandle);
+        $response = json_decode($response, true);
+        curl_close ($curlHandle);
+
         return $response;
     }
 
-    public function getPostData()
+    /**
+     * @param string $endPoint
+     * @return mixed
+     */
+    public function getRequest(string $endPoint)
     {
-        return [
-            'data' => 'postData',
-        ];
+        $responder = new Responder();
+        $curlHandle = curl_init();
+        curl_setopt($curlHandle, CURLOPT_URL,$this->api . $endPoint);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlHandle,CURLOPT_FAILONERROR,true);
+        $response = curl_exec($curlHandle);
+        // Catch errors and throw them or return true if no errors
+        $responder->countriesResponder($curlHandle);
+        $response = json_decode($response, true);
+        curl_close ($curlHandle);
+
+        return $response;
     }
 }

@@ -4,7 +4,6 @@
 namespace VFramework\Models;
 
 use PDO;
-use stdClass;
 use VFramework\Tools\Validator;
 
 class User extends AbstractModel

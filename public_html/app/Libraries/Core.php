@@ -33,7 +33,6 @@ class Core
      */
     public function getUrl()
     {
-        // $url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
         if (isset($_SERVER['REQUEST_URI'])) {
             // rtrim() Removes the desired char from the right side
             $url = rtrim($_SERVER['REQUEST_URI'], '/');
@@ -41,6 +40,7 @@ class Core
             $url = filter_var($url, FILTER_SANITIZE_URL);
             // Separate URL's parameters in array by '/'
             $url = explode('/', $url);
+
             return $url;
         }
     }
@@ -56,8 +56,10 @@ class Core
             $this->currentController = ucwords($url[0]);
             // Unset 0 Index
             unset($url[0]);
+
             return $url;
         }
+
         return [];
     }
 
@@ -73,9 +75,11 @@ class Core
                 $this->currentMethod = $url[1];
                 // Unset 1 index
                 unset($url[1]);
+
                 return $url;
             }
         }
+
         return [];
     }
 
@@ -101,8 +105,10 @@ class Core
         $this->params = $url ? array_values($url) : [];
         // Call a callback with array of params
         if (call_user_func_array([$this->currentController, $this->currentMethod], $this->params)) {
+
             return true;
         }
+
         return false;
     }
 }

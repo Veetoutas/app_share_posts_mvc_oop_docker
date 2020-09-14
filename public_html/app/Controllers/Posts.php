@@ -110,6 +110,7 @@ class Posts extends Controller
             // IF POST VALIDATION FAILS
             $this->view('posts/add', $data, $this->validator->errors);
         }
+
         // Get existing post from model
         $post = $this->model->getBy(['id' => $id]);
         if ($post->user_id !== $_SESSION['user_id']) {

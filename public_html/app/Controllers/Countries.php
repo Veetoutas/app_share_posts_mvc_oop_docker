@@ -11,28 +11,29 @@ use VFramework\Models\Country;
 
 class Countries
 {
+
+    private const COUNTRIES_API = 'https://restcountries.eu/rest/v2';
+
     public function __construct()
     {
-        $this->model = new Country();
+        $this->country = new Country();
     }
 
     /**
-     * @var array
+     * @return bool
      */
-    protected $limitedCountries = [];
-
-
-    public function countriesApi(): void
+    public function countriesApi(): bool
     {
-        $citiesApi = new CountriesApi(new Client('https://restcountries.eu/rest/v2'));
+        $citiesApi = new CountriesApi(new Client(self::COUNTRIES_API));
         $countries = $citiesApi->getCountries();
         $countries = $this->makeCountriesArray($countries);
+
         foreach ($countries as $country)
         {
-            $this->model->add($country);
+            $this->country->add($country);
         }
-        die('Fecthed successfuly!');
 
+        return true;
     }
 
     /**
@@ -54,6 +55,7 @@ class Countries
             'timezones' => $country['timezones'][0]
             ];
         }
+
         return $countriesArray;
     }
 }

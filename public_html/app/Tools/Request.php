@@ -13,9 +13,10 @@ class Request
     public function requested(string $method): bool
     {
         // POST
-        if ($_SERVER['REQUEST_METHOD'] == self::METHOD) {
+        if ($_SERVER['REQUEST_METHOD'] === self::METHOD) {
             return false;
         }
+
         return true;
     }
 }

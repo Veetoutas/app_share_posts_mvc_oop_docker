@@ -13,6 +13,10 @@ class CountriesApi
      */
     private Client $client;
 
+    /**
+     * CountriesApi constructor.
+     * @param Client $client
+     */
     public function __construct(Client $client)
     {
         $this->client = $client;
@@ -23,6 +27,6 @@ class CountriesApi
      */
     public function getCountries()
     {
-         return $response = $this->client->getRequest(self::ENDPOINT_ALL);
+        return $this->client->getRequest(self::ENDPOINT_ALL);
     }
 }
