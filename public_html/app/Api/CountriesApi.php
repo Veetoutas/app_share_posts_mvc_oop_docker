@@ -23,9 +23,9 @@ class CountriesApi
     }
 
     /**
-     * @return mixed
+     * @return CountriesResponder
      */
-    public function getCountries()
+    public function getCountries(): CountriesResponder
     {
         return $this->client->getRequest(self::ENDPOINT_ALL);
     }

@@ -5,6 +5,7 @@ namespace VFramework\Controllers;
 
 use VFramework\Api\Client;
 use VFramework\Api\CountriesApi;
+use VFramework\Api\CountriesResponder;
 use VFramework\Helpers\UrlHelper;
 use VFramework\Models\AbstractModel;
 use VFramework\Models\Country;
@@ -26,7 +27,7 @@ class Countries
     {
         $citiesApi = new CountriesApi(new Client(self::COUNTRIES_API));
         $countries = $citiesApi->getCountries();
-        $countries = $this->makeCountriesArray($countries);
+        $countries = $this->makeCountriesArray($countries->toArray());
 
         foreach ($countries as $country)
         {
