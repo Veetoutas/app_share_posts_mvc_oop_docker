@@ -104,7 +104,7 @@ class Validator
      */
     public function exists(string $value, string $fieldName): bool
     {
-        if (!$this->model->findByEmail($value)) {
+        if (!$this->model->getBy(['email' => $value])) {
             $this->errors[] = '- User with that ' . $fieldName . ' does not exist' . '<br>';
             return false;
         }
@@ -118,7 +118,7 @@ class Validator
      */
     public function emailIsUnique(string $value, string $fieldName): bool
     {
-        if ($this->model->findByEmail($value)) {
+        if ($this->model->getBy(['email' => $value])) {
             $this->errors[] = '- User with that ' . $fieldName . ' is already taken' . '<br>';
             return false;
         }

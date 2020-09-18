@@ -4,10 +4,7 @@ namespace VFramework\Tools;
 
 class Request
 {
-    /**
-     * @var string
-     */
-    private $method = '';
+    private const METHOD = 'GET';
 
     /**
      * @param string $method
@@ -16,9 +13,10 @@ class Request
     public function requested(string $method): bool
     {
         // POST
-        if ($_SERVER['REQUEST_METHOD'] == $method) {
-            return true;
+        if ($_SERVER['REQUEST_METHOD'] === self::METHOD) {
+            return false;
         }
-        return false;
+
+        return true;
     }
 }

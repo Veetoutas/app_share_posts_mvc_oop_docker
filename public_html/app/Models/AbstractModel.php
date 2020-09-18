@@ -24,7 +24,6 @@ namespace VFramework\Models;
       */
      public function add(array $data): bool
      {
-         unset($data['confirm_password']);
          $columns = implode(', ', array_keys($data));
          $values = implode(", :", array_keys($data));
          $query = 'INSERT INTO ' .$this->table. ' ('.$columns.') VALUES (:'.$values.')';
@@ -35,6 +34,7 @@ namespace VFramework\Models;
              $bindKey = sprintf(':%s', $key);
              $stmt->bindValue($bindKey, $value);
          }
+
          return $stmt->execute();
      }
 
@@ -55,6 +55,7 @@ namespace VFramework\Models;
          if ($fetchSingle) {
              return $stmt->fetch(PDO::FETCH_OBJ);
          }
+
          return $stmt->fetchAll();
      }
 
@@ -73,6 +74,7 @@ namespace VFramework\Models;
          if ($stmt->execute()) {
              return true;
          }
+
          return false;
      }
  }
