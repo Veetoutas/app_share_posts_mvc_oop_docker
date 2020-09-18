@@ -1,8 +1,6 @@
 <?php
 
-
 namespace VFramework\Api;
-
 
 class CountriesApi
 {

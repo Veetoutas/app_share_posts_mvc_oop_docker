@@ -34,6 +34,7 @@ namespace VFramework\Models;
              $bindKey = sprintf(':%s', $key);
              $stmt->bindValue($bindKey, $value);
          }
+
          return $stmt->execute();
      }
 
@@ -54,6 +55,7 @@ namespace VFramework\Models;
          if ($fetchSingle) {
              return $stmt->fetch(PDO::FETCH_OBJ);
          }
+
          return $stmt->fetchAll();
      }
 
@@ -72,6 +74,7 @@ namespace VFramework\Models;
          if ($stmt->execute()) {
              return true;
          }
+
          return false;
      }
  }
